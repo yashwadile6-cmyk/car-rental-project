@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - LuxeDrive</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style1.css">
+    <style>
+        .glass-effect { backdrop-filter: saturate(180%) blur(10px); background: rgba(255,255,255,0.06); }
+    </style>
+</head>
+<body class="bg-gray-50 overflow-x-hidden">
+    <nav class="fixed top-0 w-full z-50 glass-effect">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-3">
+                    <div class="bg-gradient-to-r from-purple-600 to-blue-600 p-3 rounded-xl">
+                        <i class="fas fa-car text-black text-xl"></i>
+                    </div>
+                    <h1 class="text-2xl font-bold gradient-text-black">RideOn</h1>
+                </div>
+                <div class="hidden md:flex items-center space-x-6 whitespace-nowrap">
+                    <a href="index1 (1).html" class="nav-btn text-white hover:text-purple-300 transition-colors font-medium">Home</a>
+                    <a href="index1 (1).html#cars" class="nav-btn text-white hover:text-purple-300 transition-colors font-medium">Ride</a>
+                    <a href="index1 (1).html#bookings" class="nav-btn text-white hover:text-purple-300 transition-colors font-medium">My Bookings</a>
+                    <a href="best-seller.html" class="nav-btn text-white hover:text-purple-300 transition-colors font-medium">Best.S</a>
+                    <a href="about.html" class="nav-btn text-white hover:text-purple-300 transition-colors font-medium">About</a>
+                </div>
+                <a href="index1 (1).html#home" class="md:hidden text-white"><i class="fas fa-bars text-xl"></i></a>
+            </div>
+        </div>
+    </nav>
+
+    <script>
+        // Redirect back to homepage on refresh of this standalone page
+        (function(){
+            try {
+                var navs = performance && performance.getEntriesByType && performance.getEntriesByType('navigation');
+                if (navs && navs[0] && navs[0].type === 'reload') {
+                    window.location.replace('index1 (1).html#about');
+                }
+            } catch(e) {}
+        })();
+    </script>
+
+    <main class="pt-24 pb-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold gradient-text mb-4">About LuxeDrive</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">We're passionate about providing exceptional car rental experiences with premium vehicles and outstanding service.</p>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
+                <div class="space-y-6">
+                    <h3 class="text-3xl font-bold text-gray-800">Our Mission</h3>
+                    <p class="text-lg text-gray-600 leading-relaxed">
+                        At LuxeDrive, we believe that every journey should be extraordinary. We provide access to premium vehicles 
+                        that combine luxury, performance, and reliability to make your travel experience unforgettable.
+                    </p>
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="text-center p-6 bg-white rounded-xl shadow-lg">
+                            <div class="text-3xl font-bold text-purple-600 mb-2">500+</div>
+                            <div class="text-gray-600">Premium Cars</div>
+                        </div>
+                        <div class="text-center p-6 bg-white rounded-xl shadow-lg">
+                            <div class="text-3xl font-bold text-purple-600 mb-2">50+</div>
+                            <div class="text-gray-600">Locations</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gradient-to-br from-purple-600 to-blue-600 rounded-2xl p-8 text-white">
+                    <h3 class="text-2xl font-bold mb-6">Why Choose Us?</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-check-circle text-yellow-400"></i>
+                            <span>Premium vehicle selection</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-check-circle text-yellow-400"></i>
+                            <span>Competitive pricing</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-check-circle text-yellow-400"></i>
+                            <span>24/7 customer support</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-check-circle text-yellow-400"></i>
+                            <span>Flexible rental terms</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white rounded-3xl shadow-2xl p-8 md:p-12 mt-8">
+                <div class="text-center mb-10">
+                    <h3 class="text-3xl md:text-4xl font-extrabold gradient-text mb-3">Our Project Team</h3>
+                    <p class="text-gray-600 max-w-3xl mx-auto">We are second-year AIML students at R. C. Patel Institute of Technology (RCPIT) — passionate engineers who love building clean, modern, and practical software experiences.</p>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="group relative bg-gradient-to-br from-gray-50 to-blue-50 rounded-2xl p-6 border border-gray-100 hover:shadow-xl transition-all duration-300">
+                        <div class="absolute -top-5 -right-5 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-full w-12 h-12 flex items-center justify-center shadow-lg">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-r from-purple-200 to-blue-200 flex items-center justify-center text-2xl text-purple-700">VP</div>
+                            <h4 class="text-xl font-bold text-gray-800">Vedanti Patil</h4>
+                            <p class="text-sm text-purple-700 font-semibold">SY AIML, RCPIT</p>
+                            <p class="mt-3 text-gray-600 text-sm">Frontend UI/UX and component design — making the experience beautiful and accessible.</p>
+                            <div class="mt-4 flex items-center justify-center gap-3 text-gray-500">
+                                <i class="fab fa-github"></i>
+                                <i class="fab fa-linkedin"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="group relative bg-gradient-to-br from-gray-50 to-blue-50 rounded-2xl p-6 border border-gray-100 hover:shadow-xl transition-all duration-300">
+                        <div class="absolute -top-5 -right-5 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-full w-12 h-12 flex items-center justify-center shadow-lg">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-r from-purple-200 to-blue-200 flex items-center justify-center text-2xl text-purple-700">YV</div>
+                            <h4 class="text-xl font-bold text-gray-800">Yash Vadile</h4>
+                            <p class="text-sm text-purple-700 font-semibold">SY AIML, RCPIT</p>
+                            <p class="mt-3 text-gray-600 text-sm">Core logic and data modeling — wiring bookings, payments, and storage seamlessly.</p>
+                            <div class="mt-4 flex items-center justify-center gap-3 text-gray-500">
+                                <i class="fab fa-github"></i>
+                                <i class="fab fa-linkedin"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="group relative bg-gradient-to-br from-gray-50 to-blue-50 rounded-2xl p-6 border border-gray-100 hover:shadow-xl transition-all duration-300">
+                        <div class="absolute -top-5 -right-5 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-full w-12 h-12 flex items-center justify-center shadow-lg">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-r from-purple-200 to-blue-200 flex items-center justify-center text-2xl text-purple-700">BP</div>
+                            <h4 class="text-xl font-bold text-gray-800">Bhavika Patil</h4>
+                            <p class="text-sm text-purple-700 font-semibold">SY AIML, RCPIT</p>
+                            <p class="mt-3 text-gray-600 text-sm">Quality, accessibility, and responsiveness — ensuring the app works great for everyone.</p>
+                            <div class="mt-4 flex items-center justify-center gap-3 text-gray-500">
+                                <i class="fab fa-github"></i>
+                                <i class="fab fa-linkedin"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="group relative bg-gradient-to-br from-gray-50 to-blue-50 rounded-2xl p-6 border border-gray-100 hover:shadow-xl transition-all duration-300">
+                        <div class="absolute -top-5 -right-5 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-full w-12 h-12 flex items-center justify-center shadow-lg">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-r from-purple-200 to-blue-200 flex items-center justify-center text-2xl text-purple-700">NB</div>
+                            <h4 class="text-xl font-bold text-gray-800">Nitin Beldar</h4>
+                            <p class="text-sm text-purple-700 font-semibold">SY AIML, RCPIT</p>
+                            <p class="mt-3 text-gray-600 text-sm">Integrations and automation — payments, emails, and admin tools that feel real.</p>
+                            <div class="mt-4 flex items-center justify-center gap-3 text-gray-500">
+                                <i class="fab fa-github"></i>
+                                <i class="fab fa-linkedin"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-10 text-center">
+                    <p class="text-gray-700 text-lg">Together, we’re building reliable products with a focus on user experience, performance, and clean engineering.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
+
+

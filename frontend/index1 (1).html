@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LuxeDrive - Premium Car Rentals</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Link to extracted stylesheet -->
+    
+    <link rel="stylesheet" href="style1.css">
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+</head>
+<body class="bg-gray-50 overflow-x-hidden">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass-effect transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-3">
+                    <div class="bg-gradient-to-r from-purple-600 to-blue-600 p-3 rounded-xl">
+                        <i class="fas fa-car text-black text-xl"></i>
+                    </div>
+                    <h1 class="text-2xl font-bold gradient-text-black">RideOn</h1>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-6 whitespace-nowrap">
+                    <a href="#home" class="nav-btn text-white hover:text-purple-300 transition-colors font-medium">Home</a>
+                    <a href="#cars" class="nav-btn text-white hover:text-purple-300 transition-colors font-medium">Ride</a>
+                    <a href="#bookings" class="nav-btn text-white hover:text-purple-300 transition-colors font-medium">My Bookings</a>
+                    <a href="best-seller.html" class="nav-btn text-white hover:text-purple-300 transition-colors font-medium">Best.S</a>
+                    <a href="about.html" class="nav-btn text-white hover:text-purple-300 transition-colors font-medium">About</a>
+                    <button id="adminNavBtn" onclick="showSection('admin')" class="nav-btn hidden text-white hover:text-purple-300 transition-colors font-medium">Admin</button>
+                    <div id="accountArea" class="flex items-center">
+                        <button id="signInBtn" onclick="openAuthModal('login')" class="ml-2 bg-white/10 text-white px-4 py-2 rounded-xl hover:bg-white/20 transition font-semibold">
+                            <i class="fas fa-user mr-2"></i>Sign In
+                        </button>
+                        <div id="userMenu" class="hidden relative">
+                            <button class="flex items-center space-x-2 bg-white/10 text-white px-4 py-2 rounded-xl hover:bg-white/20 transition font-semibold" onclick="toggleUserDropdown()">
+                                <span id="userNameLabel"></span>
+                                <i class="fas fa-chevron-down text-sm"></i>
+                            </button>
+                            <div id="userDropdown" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-xl overflow-hidden">
+                                <button onclick="showSection('bookings')" class="w-full text-left px-4 py-3 hover:bg-gray-50">
+                                    <i class="fas fa-calendar-check mr-2 text-purple-600"></i>My Bookings
+                                </button>
+                                <button onclick="logout()" class="w-full text-left px-4 py-3 hover:bg-gray-50 text-red-600">
+                                    <i class="fas fa-right-from-bracket mr-2"></i>Log out
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden text-white" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div id="mobileMenu" class="md:hidden hidden pb-4">
+                <div class="flex flex-col space-y-3">
+                    <a href="#home" class="nav-btn text-white hover:text-purple-300 transition-colors font-medium text-left">Home</a>
+                    <a href="#cars" class="nav-btn text-white hover:text-purple-300 transition-colors font-medium text-left">Fleet</a>
+                    <a href="#bookings" class="nav-btn text-white hover:text-purple-300 transition-colors font-medium text-left">My Bookings</a>
+                    <a href="best-seller.html" class="nav-btn text-white hover:text-purple-300 transition-colors font-medium text-left">Best.S</a>
+                    <a href="about.html" class="nav-btn text-white hover:text-purple-300 transition-colors font-medium text-left">About</a>
+                    <button id="adminNavBtnMobile" onclick="showSection('admin')" class="hidden text-left nav-btn text-white hover:text-purple-300 transition-colors font-medium">Admin</button>
+                    <button onclick="openAuthModal('login')" class="text-left bg-white/10 text-white px-4 py-2 rounded-xl hover:bg-white/20 transition font-semibold">
+                        <i class="fas fa-user mr-2"></i>Sign In
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home" class="section-content">
+        <!-- Hero Section -->
+        <div class="hero-gradient min-h-screen flex items-center justify-center relative overflow-hidden">
+            <div class="absolute inset-0 bg-black opacity-20"></div>
+            <div class="absolute inset-0">
+                <div class="floating-animation absolute top-20 left-10 w-20 h-20 bg-white opacity-10 rounded-full"></div>
+                <div class="floating-animation absolute top-40 right-20 w-32 h-32 bg-white opacity-5 rounded-full ex-style-1"></div>
+                <div class="floating-animation absolute bottom-20 left-1/4 w-16 h-16 bg-white opacity-10 rounded-full ex-style-2"></div>
+            </div>
+            
+            <div class="relative z-10 text-center text-white px-4 max-w-6xl mx-auto">
+                <h1 class="hero-title text-5xl md:text-7xl font-bold mb-6 fade-in">
+                    Drive Your <span class="text-yellow-400">Dreams</span>
+                </h1>
+                <p class="text-xl md:text-2xl mb-8 opacity-90 fade-in ex-style-3">
+                    Premium car rentals with unmatched luxury and service
+                </p>
+                <button onclick="showSection('cars')" class="bg-gradient-to-r from-yellow-400 to-orange-500 text-black px-8 py-4 rounded-full text-lg font-semibold hover:from-yellow-300 hover:to-orange-400 transform hover:scale-105 transition-all duration-300 pulse-glow fade-in ex-style-4">
+                    <i class="fas fa-car mr-2"></i>
+                    Explore Your Ride
+                </button>
+            </div>
+        </div>
+
+        <!-- Search Section -->
+        <div class="relative -mt-20 z-20 px-4">
+            <div class="max-w-6xl mx-auto">
+                <div class="bg-white rounded-3xl shadow-2xl p-8 glass-effect">
+                    <h3 class="text-2xl font-bold text-center mb-8 gradient-text">Find Your Perfect Ride</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="space-y-2">
+                            <label class="block text-sm font-semibold text-gray-700">
+                                <i class="fas fa-map-marker-alt mr-2 text-purple-600"></i>Pickup Location
+                            </label>
+                            <select id="pickupLocation" class="w-full p-4 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all">
+                                <option>New York, NY</option>
+                                <option>Los Angeles, CA</option>
+                                <option>Chicago, IL</option>
+                                <option>Miami, FL</option>
+                                <option>Las Vegas, NV</option>
+                            </select>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="block text-sm font-semibold text-gray-700">
+                                <i class="fas fa-calendar-alt mr-2 text-purple-600"></i>Pickup Date
+                            </label>
+                            <input type="date" id="pickupDate" class="w-full p-4 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="block text-sm font-semibold text-gray-700">
+                                <i class="fas fa-calendar-check mr-2 text-purple-600"></i>Return Date
+                            </label>
+                            <input type="date" id="returnDate" class="w-full p-4 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all">
+                        </div>
+                        <div class="flex items-end">
+                            <button onclick="searchCars()" class="w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white py-4 px-6 rounded-xl hover:from-purple-700 hover:to-blue-700 transition-all duration-300 font-semibold transform hover:scale-105">
+                                <i class="fas fa-search mr-2"></i>Search Cars
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <div class="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
+            <div class="max-w-7xl mx-auto px-4">
+                <h2 class="text-4xl font-bold text-center mb-16 gradient-text">Why Choose LuxeDrive?</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="text-center p-8 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+                        <div class="bg-gradient-to-r from-green-400 to-blue-500 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-shield-alt text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-4">Premium Insurance</h3>
+                        <p class="text-gray-600">Comprehensive coverage for complete peace of mind during your journey.</p>
+                    </div>
+                    <div class="text-center p-8 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+                        <div class="bg-gradient-to-r from-purple-400 to-pink-500 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-clock text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-4">24/7 Support</h3>
+                        <p class="text-gray-600">Round-the-clock customer service to assist you whenever you need help.</p>
+                    </div>
+                    <div class="text-center p-8 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+                        <div class="bg-gradient-to-r from-yellow-400 to-orange-500 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-star text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-4">Luxury Fleet</h3>
+                        <p class="text-gray-600">Premium vehicles maintained to the highest standards of excellence.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+    </section>
+
+    <!-- Admin Section -->
+    <section id="admin" class="section-content hidden">
+        <div class="pt-24 pb-16 bg-gradient-to-br from-gray-50 to-blue-50 min-h-screen">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="mb-8">
+                    <h2 class="text-4xl md:text-5xl font-bold gradient-text mb-2">Admin Dashboard</h2>
+                    <p class="text-gray-600">Manage availability, featured cars, and base prices.</p>
+                </div>
+
+                <div id="adminGate" class="bg-white rounded-2xl shadow-xl p-8 hidden">
+                    <div class="text-center">
+                        <i class="fas fa-lock text-5xl text-gray-300 mb-4"></i>
+                        <h3 class="text-2xl font-bold mb-2">Admin Access Required</h3>
+                        <p class="text-gray-600 mb-6">Sign in as admin to view this page.</p>
+                        <button onclick="openAuthModal('login')" class="bg-gradient-to-r from-purple-600 to-blue-600 text-white py-3 px-6 rounded-xl">Sign In</button>
+                    </div>
+                </div>
+
+                <div id="adminContent" class="space-y-8 hidden">
+                    <div class="bg-white rounded-2xl shadow-xl p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-xl font-bold text-gray-800">Featured Cars</h3>
+                            <button id="saveFeaturedBtn" class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700">Save Featured</button>
+                        </div>
+                        <div id="featuredList" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"></div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl shadow-xl p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-xl font-bold text-gray-800">Cars Management</h3>
+                            <button id="saveOverridesBtn" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Save Changes</button>
+                        </div>
+                        <div id="carsManageGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl shadow-xl p-6">
+                        <div class="mb-4">
+                            <h3 class="text-xl font-bold text-gray-800">Email Settings (EmailJS)</h3>
+                            <p class="text-sm text-gray-600">Enter your EmailJS keys. Create at <a class="text-purple-600" href="https://www.emailjs.com/" target="_blank" rel="noopener">emailjs.com</a>.</p>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <input id="emailjsServiceId" class="p-3 border rounded" placeholder="Service ID">
+                            <input id="emailjsTemplateId" class="p-3 border rounded" placeholder="Template ID">
+                            <input id="emailjsPublicKey" class="p-3 border rounded" placeholder="Public Key">
+                        </div>
+                        <div class="mt-4 flex gap-3">
+                            <button id="saveEmailConfigBtn" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Save Email Config</button>
+                            <button id="testEmailBtn" class="bg-gray-100 text-gray-800 px-4 py-2 rounded hover:bg-gray-200">Send Test Email</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Payment Section -->
+    <section id="payment" class="section-content hidden">
+        <div class="pt-24 pb-12 bg-gradient-to-br from-gray-50 to-blue-50 min-h-screen">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-10">
+                    <h2 class="text-4xl md:text-5xl font-bold gradient-text mb-3">Payment</h2>
+                    <p class="text-lg text-gray-600">Choose a payment method to complete your booking</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <!-- Payment Methods -->
+                    <div class="lg:col-span-2 space-y-6">
+                        <div class="bg-white rounded-2xl shadow-xl p-6">
+                            <h3 class="text-xl font-bold text-gray-800 mb-4">Select Payment Method</h3>
+                            <div class="space-y-3" id="paymentMethods">
+                                <label class="flex items-center p-4 border-2 rounded-xl cursor-pointer hover:border-purple-500">
+                                    <input type="radio" name="payMethod" value="upi" class="mr-3">
+                                    <div class="flex items-center gap-2">
+                                        <i class="fas fa-mobile-alt text-purple-600"></i>
+                                        <span class="font-semibold">UPI</span>
+                                    </div>
+                                </label>
+                                <label class="flex items-center p-4 border-2 rounded-xl cursor-pointer hover:border-purple-500">
+                                    <input type="radio" name="payMethod" value="card" class="mr-3">
+                                    <div class="flex items-center gap-2">
+                                        <i class="fas fa-credit-card text-purple-600"></i>
+                                        <span class="font-semibold">Card</span>
+                                    </div>
+                                </label>
+                                <label class="flex items-center p-4 border-2 rounded-xl cursor-pointer hover:border-purple-500">
+                                    <input type="radio" name="payMethod" value="netbanking" class="mr-3">
+                                    <div class="flex items-center gap-2">
+                                        <i class="fas fa-university text-purple-600"></i>
+                                        <span class="font-semibold">Net Banking</span>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-2xl shadow-xl p-6">
+                            <h3 class="text-xl font-bold text-gray-800 mb-4">Payment Details</h3>
+                            <div id="paymentDetails" class="space-y-4">
+                                <!-- Dynamic details form will be injected by JS -->
+                                <p class="text-gray-500">Select a payment method to continue.</p>
+                            </div>
+                            <div class="flex flex-col sm:flex-row gap-4 pt-4">
+                                <button id="payNowBtn" class="flex-1 bg-gradient-to-r from-purple-600 to-blue-600 text-white py-4 px-6 rounded-xl hover:from-purple-700 hover:to-blue-700 transition-all duration-300 font-semibold transform hover:scale-105" disabled>
+                                    <i class="fas fa-lock mr-2"></i>Pay Now
+                                </button>
+                                <button id="saveForLaterBtn" class="flex-1 bg-yellow-100 text-yellow-900 py-4 px-6 rounded-xl hover:bg-yellow-200 transition-all duration-300 font-semibold">
+                                    Save for later
+                                </button>
+                                <button id="cancelPaymentBtn" class="flex-1 bg-gray-200 text-gray-700 py-4 px-6 rounded-xl hover:bg-gray-300 transition-all duration-300 font-semibold">
+                                    Cancel
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Order Summary -->
+                    <div>
+                        <div class="bg-white rounded-2xl shadow-xl p-6 sticky top-28">
+                            <h3 class="text-xl font-bold text-gray-800 mb-4">Order Summary</h3>
+                            <div id="orderSummary" class="space-y-4">
+                                <!-- Populated by JS from pending booking -->
+                                <p class="text-gray-500">No booking in progress.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Confirmation Section -->
+    <section id="confirmation" class="section-content hidden">
+        <div class="pt-24 pb-12 bg-gradient-to-br from-gray-50 to-blue-50 min-h-screen">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="bg-white rounded-3xl shadow-2xl p-8 text-center">
+                    <div class="mb-6">
+                        <i class="fas fa-check-circle text-green-500 text-6xl"></i>
+                    </div>
+                    <h2 class="text-3xl md:text-4xl font-extrabold mb-2">Payment Successful</h2>
+                    <p class="text-gray-600 mb-8">Your booking is confirmed. A receipt has been generated below.</p>
+
+                    <div id="confirmationDetails" class="text-left">
+                        <!-- Filled by JS -->
+                    </div>
+
+                    <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+                        <button onclick="showSection('bookings')" class="bg-gradient-to-r from-purple-600 to-blue-600 text-white py-3 px-6 rounded-xl hover:from-purple-700 hover:to-blue-700 transition-all duration-300 font-semibold">
+                            View My Bookings
+                        </button>
+                        <button onclick="showSection('cars')" class="bg-white border-2 border-gray-200 text-gray-800 py-3 px-6 rounded-xl hover:bg-gray-50 transition-all duration-300 font-semibold">
+                            Book Another Car
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cars Section -->
+    <section id="cars" class="section-content hidden">
+        <div class="pt-24 pb-12 bg-gradient-to-br from-gray-50 to-blue-50 min-h-screen">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl md:text-5xl font-bold gradient-text mb-4">Our Premium Fleet</h2>
+                    <p class="text-xl text-gray-600">Choose from our collection of luxury vehicles</p>
+                </div>
+                
+                <!-- Filters -->
+                <div class="bg-white rounded-2xl shadow-xl p-6 mb-12">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <select id="categoryFilter" class="p-4 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all">
+                            <option value="">All Categories</option>
+                            <option value="economy">Economy</option>
+                            <option value="luxury">Luxury</option>
+                            <option value="suv">SUV</option>
+                            <option value="sports">Sports</option>
+                        </select>
+                        <select id="priceFilter" class="p-4 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all">
+                            <option value="">All Prices</option>
+                            <option value="low">Under $100</option>
+                            <option value="medium">$100 - $300</option>
+                            <option value="high">Over $300</option>
+                        </select>
+                        <select id="fuelFilter" class="p-4 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all">
+                            <option value="">All Fuel Types</option>
+                            <option value="gasoline">Gasoline</option>
+                            <option value="electric">Electric</option>
+                            <option value="hybrid">Hybrid</option>
+                        </select>
+                        <button onclick="applyFilters()" class="bg-gradient-to-r from-purple-600 to-blue-600 text-white py-4 px-6 rounded-xl hover:from-purple-700 hover:to-blue-700 transition-all duration-300 font-semibold transform hover:scale-105">
+                            <i class="fas fa-filter mr-2"></i>Apply Filters
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Car Grid -->
+                <div id="carGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Cars will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bookings Section -->
+    <section id="bookings" class="section-content hidden">
+        <div class="pt-24 pb-12 bg-gradient-to-br from-gray-50 to-blue-50 min-h-screen">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl md:text-5xl font-bold gradient-text mb-4">My Bookings</h2>
+                    <p class="text-xl text-gray-600">Manage your car rental reservations</p>
+                </div>
+                <div id="bookingsList" class="space-y-6">
+                    <!-- Bookings will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+
+    <!-- Booking Modal -->
+    <div id="bookingModal" class="fixed inset-0 modal-backdrop hidden items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-3xl p-8 max-w-2xl w-full mx-4 max-h-screen overflow-y-auto slide-in">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-3xl font-bold gradient-text">Book Your Dream Car</h3>
+                <button onclick="closeBookingModal()" class="text-gray-500 hover:text-gray-700 text-2xl">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div id="selectedCarInfo" class="mb-8"></div>
+            
+            <form id="bookingForm" class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">
+                            <i class="fas fa-user mr-2 text-purple-600"></i>Full Name
+                        </label>
+                        <input type="text" id="customerName" required class="w-full p-4 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">
+                            <i class="fas fa-envelope mr-2 text-purple-600"></i>Email
+                        </label>
+                        <input type="email" id="customerEmail" required class="w-full p-4 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all">
+                    </div>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">
+                        <i class="fas fa-phone mr-2 text-purple-600"></i>Phone Number
+                    </label>
+                    <input type="tel" id="customerPhone" required class="w-full p-4 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all">
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">
+                            <i class="fas fa-calendar-alt mr-2 text-purple-600"></i>Pickup Date
+                        </label>
+                        <input type="date" id="bookingPickupDate" required class="w-full p-4 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">
+                            <i class="fas fa-calendar-check mr-2 text-purple-600"></i>Return Date
+                        </label>
+                        <input type="date" id="bookingReturnDate" required class="w-full p-4 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all">
+                    </div>
+                </div>
+                
+                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 pt-6">
+                    <button type="button" onclick="closeBookingModal()" class="flex-1 bg-gray-200 text-gray-700 py-4 px-6 rounded-xl hover:bg-gray-300 transition-all duration-300 font-semibold">
+                        Cancel
+                    </button>
+                    <button type="submit" class="flex-1 bg-gradient-to-r from-purple-600 to-blue-600 text-white py-4 px-6 rounded-xl hover:from-purple-700 hover:to-blue-700 transition-all duration-300 font-semibold transform hover:scale-105">
+                        <i class="fas fa-credit-card mr-2"></i>Confirm Booking
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Auth Modal -->
+    <div id="authModal" class="fixed inset-0 modal-backdrop hidden items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-3xl p-8 max-w-lg w-full mx-4 max-h-screen overflow-y-auto slide-in">
+            <div class="flex justify-between items-center mb-6">
+                <h3 id="authTitle" class="text-3xl font-bold gradient-text">Welcome Back</h3>
+                <button onclick="closeAuthModal()" class="text-gray-500 hover:text-gray-700 text-2xl">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div class="flex bg-gray-100 rounded-xl p-1 mb-6">
+                <button id="loginTab" onclick="switchAuthTab('login')" class="flex-1 py-3 rounded-lg font-semibold bg-white shadow">Sign In</button>
+                <button id="registerTab" onclick="switchAuthTab('register')" class="flex-1 py-3 rounded-lg font-semibold text-gray-600">Create Account</button>
+            </div>
+
+            <form id="loginForm" class="space-y-5">
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2"><i class="fas fa-envelope mr-2 text-purple-600"></i>Email</label>
+                    <input type="email" id="loginEmail" required class="w-full p-4 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all" placeholder="you@example.com">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2"><i class="fas fa-lock mr-2 text-purple-600"></i>Password</label>
+                    <input type="password" id="loginPassword" required minlength="6" class="w-full p-4 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all" placeholder="••••••">
+                </div>
+                <button type="submit" class="w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white py-4 px-6 rounded-xl hover:from-purple-700 hover:to-blue-700 transition-all duration-300 font-semibold transform hover:scale-105">
+                    Sign In
+                </button>
+                <p class="text-sm text-center text-gray-500">Don't have an account? <button type="button" class="text-purple-600 font-semibold" onclick="switchAuthTab('register')">Create one</button></p>
+            </form>
+
+            <form id="registerForm" class="space-y-5 hidden">
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2"><i class="fas fa-user mr-2 text-purple-600"></i>Full Name</label>
+                    <input type="text" id="regName" required class="w-full p-4 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all" placeholder="Jane Doe">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2"><i class="fas fa-envelope mr-2 text-purple-600"></i>Email</label>
+                    <input type="email" id="regEmail" required class="w-full p-4 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all" placeholder="you@example.com">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2"><i class="fas fa-lock mr-2 text-purple-600"></i>Password</label>
+                    <input type="password" id="regPassword" required minlength="6" class="w-full p-4 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all" placeholder="At least 6 characters">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2"><i class="fas fa-lock mr-2 text-purple-600"></i>Confirm Password</label>
+                    <input type="password" id="regConfirm" required minlength="6" class="w-full p-4 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all" placeholder="Re-enter password">
+                </div>
+                <div class="flex items-center space-x-2 text-sm text-gray-600">
+                    <input id="regTerms" type="checkbox" required class="w-4 h-4 text-purple-600 border-gray-300 rounded">
+                    <label for="regTerms">I agree to the <span class="text-purple-600">Terms</span> and <span class="text-purple-600">Privacy</span></label>
+                </div>
+                <button type="submit" class="w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white py-4 px-6 rounded-xl hover:from-purple-700 hover:to-blue-700 transition-all duration-300 font-semibold transform hover:scale-105">
+                    Create Account
+                </button>
+                <p class="text-sm text-center text-gray-500">Already have an account? <button type="button" class="text-purple-600 font-semibold" onclick="switchAuthTab('login')">Sign in</button></p>
+            </form>
+        </div>
+    </div>
+ 
+    
+    <script src="authStore.js"></script>
+    <script src="bookingStore.js"></script>
+    <script src="api.js"></script>
+    <script src="script (2).js"></script>
+</body>
+</html>

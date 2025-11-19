@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Best Sellers - LuxeDrive</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style1.css">
+    <style>
+        .glass-effect { backdrop-filter: saturate(180%) blur(10px); background: rgba(255,255,255,0.06); }
+    </style>
+    <script>
+        // Redirect back to homepage on refresh of this standalone page
+        (function(){
+            try {
+                var navs = performance && performance.getEntriesByType && performance.getEntriesByType('navigation');
+                if (navs && navs[0] && navs[0].type === 'reload') {
+                    window.location.replace('index1 (1).html#cars');
+                }
+            } catch(e) {}
+        })();
+
+        // Minimal data (copied from app) to render best sellers standalone
+        const cars = [
+            { id: 1, name: "Tesla Model S", category: "luxury", price: 299, fuel: "electric", seats: 5, transmission: "Automatic", image: "https://images.unsplash.com/photo-1617788138017-80ad40651399?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", images: ["https://images.unsplash.com/photo-1617788138017-80ad40651399?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"], features: ["Autopilot","Premium Audio","Glass Roof","Supercharging"], available: true, rating: 4.9 },
+            { id: 2, name: "BMW X5", category: "suv", price: 199, fuel: "gasoline", seats: 7, transmission: "Automatic", image: "https://images.unsplash.com/photo-1555215695-3004980ad54e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", images: ["https://images.unsplash.com/photo-1555215695-3004980ad54e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"], features: ["4WD","Leather Seats","Navigation","Heated Seats"], available: true, rating: 4.8 },
+            { id: 3, name: "Mercedes-Benz C-Class", category: "luxury", price: 249, fuel: "gasoline", seats: 5, transmission: "Automatic", image: "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", images: ["https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"], features: ["Premium Interior","Advanced Safety","Wireless Charging","Ambient Lighting"], available: true, rating: 4.9 },
+            { id: 4, name: "Audi A4", category: "luxury", price: 189, fuel: "gasoline", seats: 5, transmission: "Automatic", image: "https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", images: ["https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"], features: ["Quattro AWD","Virtual Cockpit","Bang & Olufsen Audio","Matrix LED"], available: true, rating: 4.7 },
+            { id: 5, name: "Porsche 911", category: "sports", price: 599, fuel: "gasoline", seats: 4, transmission: "Manual", image: "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", images: ["https://images.unsplash.com/photo-1544636331-e26879cd4d9b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"], features: ["Sport Chrono","PASM","Sport Exhaust","Carbon Fiber"], available: true, rating: 5.0 },
+            { id: 6, name: "Toyota Camry", category: "economy", price: 79, fuel: "hybrid", seats: 5, transmission: "Automatic", image: "https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", images: ["https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"], features: ["Hybrid Engine","Safety Sense","Apple CarPlay","LED Headlights"], available: true, rating: 4.5 },
+            { id: 7, name: "Range Rover Evoque", category: "suv", price: 279, fuel: "gasoline", seats: 5, transmission: "Automatic", image: "https://images.unsplash.com/photo-1606016159991-8b5d2f87a5a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", images: ["https://images.unsplash.com/photo-1606016159991-8b5d2f87a5a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"], features: ["Terrain Response","Panoramic Roof","Meridian Audio","ClearSight"], available: true, rating: 4.8 },
+            { id: 8, name: "Lamborghini Huracán", category: "sports", price: 1299, fuel: "gasoline", seats: 2, transmission: "Automatic", image: "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", images: ["https://images.unsplash.com/photo-1544636331-e26879cd4d9b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"], features: ["V10 Engine","Carbon Fiber","Track Mode","Launch Control"], available: true, rating: 5.0 }
+        ];
+
+        function renderBestSellers() {
+            // Simple ranking: highest rating first, then price desc
+            const top = [...cars]
+                .sort((a,b) => (b.rating - a.rating) || (b.price - a.price))
+                .slice(0, 8);
+            const row = document.getElementById('bestSellersRow');
+            const ts = document.getElementById('bestSellersUpdatedAt');
+            row.innerHTML = top.map(car => `
+                <div class="bg-white border border-gray-100 rounded-2xl shadow-sm hover:shadow-md transition overflow-hidden">
+                    <div class="relative">
+                        <img src="${(car.images && car.images[0]) ? car.images[0] : car.image}" alt="${car.name}" class="w-full h-44 object-cover" onerror="this.style.display='none'">
+                        <span class="absolute top-3 left-3 bg-yellow-400 text-black text-xs font-bold px-2 py-1 rounded">Top Rated</span>
+                        <span class="absolute top-3 right-3 bg-purple-600 text-white text-xs font-bold px-2 py-1 rounded">${car.rating}★</span>
+                    </div>
+                    <div class="p-4">
+                        <div class="font-bold text-gray-900">${car.name}</div>
+                        <div class="text-sm text-gray-600 capitalize">${car.category} • ${car.seats} seats</div>
+                        <div class="text-sm text-green-700 mb-3">$${car.price}<span class="text-gray-600">/day</span></div>
+                        <a href="index1 (1).html#cars" class="w-full inline-block text-center bg-gradient-to-r from-purple-600 to-blue-600 text-white py-2.5 rounded-lg hover:from-purple-700 hover:to-blue-700 text-sm font-semibold">Book on homepage</a>
+                    </div>
+                </div>
+            `).join('');
+            ts.textContent = new Date().toLocaleTimeString();
+        }
+
+        document.addEventListener('DOMContentLoaded', renderBestSellers);
+    </script>
+</head>
+<body class="bg-gray-50 overflow-x-hidden">
+    <nav class="fixed top-0 w-full z-50 glass-effect">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-3">
+                    <div class="bg-gradient-to-r from-purple-600 to-blue-600 p-3 rounded-xl">
+                        <i class="fas fa-car text-black text-xl"></i>
+                    </div>
+                    <h1 class="text-2xl font-bold gradient-text-black">RideOn</h1>
+                </div>
+                <div class="hidden md:flex items-center space-x-6 whitespace-nowrap">
+                    <a href="index1 (1).html" class="nav-btn text-white hover:text-purple-300 transition-colors font-medium">Home</a>
+                    <a href="index1 (1).html#cars" class="nav-btn text-white hover:text-purple-300 transition-colors font-medium">Ride</a>
+                    <a href="index1 (1).html#bookings" class="nav-btn text-white hover:text-purple-300 transition-colors font-medium">My Bookings</a>
+                    <a href="best-seller.html" class="nav-btn text-white hover:text-purple-300 transition-colors font-medium">Best.S</a>
+                    <a href="about.html" class="nav-btn text-white hover:text-purple-300 transition-colors font-medium">About</a>
+                </div>
+                <a href="index1 (1).html" class="md:hidden text-white"><i class="fas fa-bars text-xl"></i></a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-24 pb-16">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex items-end justify-between mb-8">
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-extrabold gradient-text">Best Sellers</h2>
+                    <p class="text-sm text-gray-500">Updated <span id="bestSellersUpdatedAt">just now</span></p>
+                </div>
+            </div>
+            <div id="bestSellersRow" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+        </div>
+    </main>
+</body>
+</html>
+
+
